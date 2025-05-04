@@ -8,14 +8,17 @@
     <meta name="author" content="Saad El Aboudi">
     <title>Saad El Aboudi - CV</title>
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 </head>
 <body>
 <!--===== HEADER =====-->
 <header class="l-header" role="banner">
     <nav class="nav bd-grid" role="navigation" aria-label="Menu principal">
-        <div>
-            <a href="#" class="nav__logo">Saad El Aboudi</a>
+        <div class="nav__logo-container">
+            <a href="#" class="nav__logo"></a>
         </div>
         <div class="nav__menu" id="nav-menu">
             <ul class="nav__list">
@@ -26,8 +29,13 @@
                 <li class="nav__item"><a href="#education" class="nav__link">Formation</a></li>
             </ul>
         </div>
-        <div class="nav__toggle" id="nav-toggle" aria-label="Ouvrir le menu">
-            <i class='bx bx-menu'></i>
+        <div class="nav__actions">
+            <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Activer le mode sombre">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="nav__toggle" id="nav-toggle" aria-label="Ouvrir le menu">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
     </nav>
 </header>
@@ -36,24 +44,18 @@
     <!--===== HOME =====-->
     <section class="home bd-grid" id="home">
         <div class="home__data">
-            <h1 class="home__title">Bonjour,<br>Je suis <span class="home__title-color">Saad</span><br>Product Manager</h1>
-            <a href="assets/files/Saad_El_Aboundi_CV.pdf" class="button" download>Télécharger mon CV</a>
+            <h1 class="home__title">Salut, je suis <span class="home__title-color">Saad</span><br>Product Manager</h1>
+            <p class="home__subtitle">Consultant Senior en IA & Data</p>
+            <div class="home__contact">
+                <p>Email: <a href="mailto:elaboudisaad@gmail.com" class="home__contact-link">elaboudisaad@gmail.com</a></p>
+                <p>Téléphone: <a href="tel:+33617078713" class="home__contact-link">+33 6 17 07 87 13</a></p>
+            </div>
         </div>
         <div class="home__social">
-            <a href="https://www.linkedin.com/in/saadelaboudi/" class="home__social-icon" aria-label="Profil LinkedIn"><i class='bx bxl-linkedin'></i></a>
-            <a href="https://github.com/SaadElAboudi" class="home__social-icon" aria-label="Profil GitHub"><i class='bx bxl-github'></i></a>
+            <a href="https://www.linkedin.com/in/saadelaboudi/" class="home__social-icon" aria-label="Profil LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/SaadElAboudi" class="home__social-icon" aria-label="Profil GitHub"><i class="fab fa-github"></i></a>
         </div>
-        <div class="home__img">
-            <svg class="home__blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg">
-                <mask id="mask0" mask-type="alpha">
-                    <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                </mask>
-                <g mask="url(#mask0)">
-                    <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                    <image class="home__blob-img" x="50" y="60" href="assets/img/about.jpg"/>
-                </g>
-            </svg>
-        </div>
+        <div class="home__map" id="map"></div>
     </section>
 
     <!--===== ABOUT =====-->
@@ -103,167 +105,170 @@
                     <div><span class="skills__percentage">65%</span></div>
                 </div>
             </div>
-            <div>
-                <img src="assets/img/work3.jpg" alt="Illustration compétences" class="skills__img">
-            </div>
         </div>
     </section>
 
     <!--===== WORK =====-->
     <section class="work section" id="work">
         <h2 class="section-title">Expériences professionnelles</h2>
-        <div class="work__container bd-grid">
-            <article class="card">
-                <h3>Groupe BPCE</h3>
-                <h4>Senior Technical Product Owner | 01/2024 – Aujourd’hui</h4>
-                <p class="card__summary">Conception, déploiement et optimisation d’une architecture événementielle pour les actifs numériques (cryptos).</p>
-                <div class="card__content">
-                    <ul>
-                        <li>Développement et optimisation des services d’authentification, step-up et maintien de session.</li>
-                        <li>Coordination entre équipes frontend et backend pour une expérience utilisateur fluide.</li>
-                        <li>Mise en place et supervision des logs et tests pour garantir qualité et traçabilité.</li>
-                        <li>Conception et intégration de Pub/Sub dans l’architecture événementielle.</li>
-                        <li>Optimisation des flux d’événements en temps réel.</li>
-                        <li>Supervision de l’architecture événementielle globale.</li>
-                        <li>Génération automatisée de documents et intégration dans le workflow.</li>
-                        <li>Conception du back-office pour la gestion des opérations et utilisateurs.</li>
-                    </ul>
-                    <div class="skills">
-                        <h5>Compétences :</h5>
+        <div class="work__timeline bd-grid">
+            <div class="work__item" data-side="left">
+                <div class="work__point"></div>
+                <div class="work__card">
+                    <h3>Groupe BPCE</h3>
+                    <h4>Senior Technical Product Owner | 01/2024 – Aujourd’hui</h4>
+                    <p class="work__summary">Conception, déploiement et optimisation d’une architecture événementielle pour les actifs numériques (cryptos).</p>
+                    <div class="work__content">
                         <ul>
-                            <li>SAML, OpenID Connect, Keycloak, gestion des sessions</li>
-                            <li>Google Cloud Pub/Sub, Monitoring</li>
-                            <li>Architecture orientée événements, scalable et modulaire</li>
-                            <li>Gestion de la sécurité et identité des utilisateurs</li>
-                            <li>Plans de tests pour services critiques</li>
+                            <li>Développement et optimisation des services d’authentification, step-up et maintien de session.</li>
+                            <li>Coordination entre équipes frontend et backend pour une expérience utilisateur fluide.</li>
+                            <li>Mise en place et supervision des logs et tests pour garantir qualité et traçabilité.</li>
+                            <li>Conception et intégration de Pub/Sub dans l’architecture événementielle.</li>
+                            <li>Optimisation des flux d’événements en temps réel.</li>
+                            <li>Supervision de l’architecture événementielle globale.</li>
+                            <li>Génération automatisée de documents et intégration dans le workflow.</li>
+                            <li>Conception du back-office pour la gestion des opérations et utilisateurs.</li>
                         </ul>
+                        <div class="skills">
+                            <h5>Compétences :</h5>
+                            <ul>
+                                <li>SAML, OpenID Connect, Keycloak, gestion des sessions</li>
+                                <li>Google Cloud Pub/Sub, Monitoring</li>
+                                <li>Architecture orientée événements, scalable et modulaire</li>
+                                <li>Gestion de la sécurité et identité des utilisateurs</li>
+                                <li>Plans de tests pour services critiques</li>
+                            </ul>
+                        </div>
                     </div>
+                    <button class="work__toggle button" data-action="more">Voir plus</button>
                 </div>
-                <div class="card__button-container">
-                    <button class="card__toggle button" data-action="more">Voir plus</button>
-                </div>
-            </article>
-            <article class="card">
-                <h3>BNP Paribas</h3>
-                <h4>Senior AI & Data Consultant | 11/2023 – Aujourd’hui</h4>
-                <p class="card__summary">Acculturation à l’IA et au ML pour divers publics via des cas d’usage concrets.</p>
-                <div class="card__content">
-                    <ul>
-                        <li>Conception de sessions sur l’apprentissage supervisé, non supervisé, réseaux de neurones, et méthodologie ML.</li>
-                        <li>Présentation d’une démarche complète de projet ML, du besoin métier à la mise en production.</li>
-                        <li>Illustration des concepts par des cas d’usage réels (finance, santé, logistique).</li>
-                        <li>Animation d’ateliers pratiques avec Microsoft Azure ML Studio.</li>
-                    </ul>
-                    <div class="skills">
-                        <h5>Compétences :</h5>
+            </div>
+            <div class="work__item" data-side="right">
+                <div class="work__point"></div>
+                <div class="work__card">
+                    <h3>BNP Paribas</h3>
+                    <h4>Senior AI & Data Consultant | 11/2023 – Aujourd’hui</h4>
+                    <p class="work__summary">Acculturation à l’IA et au ML pour divers publics via des cas d’usage concrets.</p>
+                    <div class="work__content">
                         <ul>
-                            <li>Pédagogie et vulgarisation des concepts techniques</li>
-                            <li>Gestion de projet Data et IA</li>
-                            <li>Microsoft Azure ML Studio</li>
-                            <li>Application pratique des concepts ML</li>
+                            <li>Conception de sessions sur l’apprentissage supervisé, non supervisé, réseaux de neurones, et méthodologie ML.</li>
+                            <li>Présentation d’une démarche complète de projet ML, du besoin métier à la mise en production.</li>
+                            <li>Illustration des concepts par des cas d’usage réels (finance, santé, logistique).</li>
+                            <li>Animation d’ateliers pratiques avec Microsoft Azure ML Studio.</li>
                         </ul>
+                        <div class="skills">
+                            <h5>Compétences :</h5>
+                            <ul>
+                                <li>Pédagogie et vulgarisation des concepts techniques</li>
+                                <li>Gestion de projet Data et IA</li>
+                                <li>Microsoft Azure ML Studio</li>
+                                <li>Application pratique des concepts ML</li>
+                            </ul>
+                        </div>
                     </div>
+                    <button class="work__toggle button" data-action="more">Voir plus</button>
                 </div>
-                <div class="card__button-container">
-                    <button class="card__toggle button" data-action="more">Voir plus</button>
-                </div>
-            </article>
-            <article class="card">
-                <h3>Courir</h3>
-                <h4>Senior Data Consultant | 03/2023 – 09/2023</h4>
-                <p class="card__summary">Centralisation des informations produits via une solution PIM.</p>
-                <div class="card__content">
-                    <ul>
-                        <li>Diagnostic des besoins et processus pour la gestion des informations produits.</li>
-                        <li>Collaboration avec les équipes métiers pour définir les exigences fonctionnelles.</li>
-                        <li>Audit des outils et processus pour identifier les inefficacités.</li>
-                        <li>Sourcing et rédaction du RFP pour la sélection d’une solution PIM.</li>
-                    </ul>
-                    <div class="skills">
-                        <h5>Compétences :</h5>
+            </div>
+            <div class="work__item" data-side="left">
+                <div class="work__point"></div>
+                <div class="work__card">
+                    <h3>Courir</h3>
+                    <h4>Senior Data Consultant | 03/2023 – 09/2023</h4>
+                    <p class="work__summary">Centralisation des informations produits via une solution PIM.</p>
+                    <div class="work__content">
                         <ul>
-                            <li>Analyse des systèmes d’information</li>
-                            <li>Traduction des besoins métiers en spécifications</li>
-                            <li>Gestion des appels d’offres et RFP</li>
-                            <li>Connaissance des solutions PIM</li>
+                            <li>Diagnostic des besoins et processus pour la gestion des informations produits.</li>
+                            <li>Collaboration avec les équipes métiers pour définir les exigences fonctionnelles.</li>
+                            <li>Audit des outils et processus pour identifier les inefficacités.</li>
+                            <li>Sourcing et rédaction du RFP pour la sélection d’une solution PIM.</li>
                         </ul>
+                        <div class="skills">
+                            <h5>Compétences :</h5>
+                            <ul>
+                                <li>Analyse des systèmes d’information</li>
+                                <li>Traduction des besoins métiers en spécifications</li>
+                                <li>Gestion des appels d’offres et RFP</li>
+                                <li>Connaissance des solutions PIM</li>
+                            </ul>
+                        </div>
                     </div>
+                    <button class="work__toggle button" data-action="more">Voir plus</button>
                 </div>
-                <div class="card__button-container">
-                    <button class="card__toggle button" data-action="more">Voir plus</button>
-                </div>
-            </article>
-            <article class="card">
-                <h3>Diskyver</h3>
-                <h4>Président | 01/2021 – 09/2024</h4>
-                <p class="card__summary">Conception d’une plateforme cloud pour l’analyse des cyberattaques ToIP.</p>
-                <div class="card__content">
-                    <ul>
-                        <li>Direction de la conception et développement de la plateforme cloud.</li>
-                        <li>Élaboration de la stratégie et roadmaps techniques/fonctionnelles.</li>
-                        <li>Supervision financière, optimisation des coûts et gestion des ressources.</li>
-                        <li>Direction des équipes commerciales et marketing.</li>
-                        <li>Gestion des relations avec les investisseurs.</li>
-                        <li>Gestion des crises et pivot stratégique.</li>
-                    </ul>
-                    <div class="skills">
-                        <h5>Compétences :</h5>
+            </div>
+            <div class="work__item" data-side="right">
+                <div class="work__point"></div>
+                <div class="work__card">
+                    <h3>Diskyver</h3>
+                    <h4>Président | 01/2021 – 09/2024</h4>
+                    <p class="work__summary">Conception d’une plateforme cloud pour l’analyse des cyberattaques ToIP.</p>
+                    <div class="work__content">
                         <ul>
-                            <li>Architecture cloud (SaaS)</li>
-                            <li>Cybersécurité, ToIP, analyse des menaces</li>
-                            <li>Vision stratégique et roadmaps</li>
-                            <li>Leadership et gestion financière</li>
+                            <li>Direction de la conception et développement de la plateforme cloud.</li>
+                            <li>Élaboration de la stratégie et roadmaps techniques/fonctionnelles.</li>
+                            <li>Supervision financière, optimisation des coûts et gestion des ressources.</li>
+                            <li>Direction des équipes commerciales et marketing.</li>
+                            <li>Gestion des relations avec les investisseurs.</li>
+                            <li>Gestion des crises et pivot stratégique.</li>
                         </ul>
+                        <div class="skills">
+                            <h5>Compétences :</h5>
+                            <ul>
+                                <li>Architecture cloud (SaaS)</li>
+                                <li>Cybersécurité, ToIP, analyse des menaces</li>
+                                <li>Vision stratégique et roadmaps</li>
+                                <li>Leadership et gestion financière</li>
+                            </ul>
+                        </div>
                     </div>
+                    <button class="work__toggle button" data-action="more">Voir plus</button>
                 </div>
-                <div class="card__button-container">
-                    <button class="card__toggle button" data-action="more">Voir plus</button>
-                </div>
-            </article>
-            <article class="card">
-                <h3>Airbus</h3>
-                <h4>Product Lifecycle Management AMOA | 01/2019 – 09/2019</h4>
-                <p class="card__summary">Gestion d’un projet PLM avec PTC Windchill 11.</p>
-                <div class="card__content">
-                    <ul>
-                        <li>Analyse des besoins et rédaction de documentation (spécifications, manuels).</li>
-                        <li>Suivi de la migration et contrôle de la qualité des données.</li>
-                    </ul>
-                    <div class="skills">
-                        <h5>Compétences :</h5>
+            </div>
+            <div class="work__item" data-side="left">
+                <div class="work__point"></div>
+                <div class="work__card">
+                    <h3>Airbus</h3>
+                    <h4>Product Lifecycle Management AMOA | 01/2019 – 09/2019</h4>
+                    <p class="work__summary">Gestion d’un projet PLM avec PTC Windchill 11.</p>
+                    <div class="work__content">
                         <ul>
-                            <li>Rédaction technique, analyse fonctionnelle</li>
-                            <li>Gestion des migrations, PL/SQL, SQL</li>
-                            <li>HP Quality Center</li>
+                            <li>Analyse des besoins et rédaction de documentation (spécifications, manuels).</li>
+                            <li>Suivi de la migration et contrôle de la qualité des données.</li>
                         </ul>
+                        <div class="skills">
+                            <h5>Compétences :</h5>
+                            <ul>
+                                <li>Rédaction technique, analyse fonctionnelle</li>
+                                <li>Gestion des migrations, PL/SQL, SQL</li>
+                                <li>HP Quality Center</li>
+                            </ul>
+                        </div>
                     </div>
+                    <button class="work__toggle button" data-action="more">Voir plus</button>
                 </div>
-                <div class="card__button-container">
-                    <button class="card__toggle button" data-action="more">Voir plus</button>
-                </div>
-            </article>
-            <article class="card">
-                <h3>Invivox</h3>
-                <h4>R&D Machine Learning | 05/2018 – 10/2018</h4>
-                <p class="card__summary">Développement de systèmes de recommandation.</p>
-                <div class="card__content">
-                    <ul>
-                        <li>Implémentation en Python d’un système basé sur l’apprentissage supervisé.</li>
-                        <li>Développement d’un système de filtrage collaboratif.</li>
-                    </ul>
-                    <div class="skills">
-                        <h5>Compétences :</h5>
+            </div>
+            <div class="work__item" data-side="right">
+                <div class="work__point"></div>
+                <div class="work__card">
+                    <h3>Invivox</h3>
+                    <h4>R&D Machine Learning | 05/2018 – 10/2018</h4>
+                    <p class="work__summary">Développement de systèmes de recommandation.</p>
+                    <div class="work__content">
                         <ul>
-                            <li>Programmation Python</li>
-                            <li>Apprentissage supervisé</li>
-                            <li>Filtrage collaboratif</li>
+                            <li>Implémentation en Python d’un système basé sur l’apprentissage supervisé.</li>
+                            <li>Développement d’un système de filtrage collaboratif.</li>
                         </ul>
+                        <div class="skills">
+                            <h5>Compétences :</h5>
+                            <ul>
+                                <li>Programmation Python</li>
+                                <li>Apprentissage supervisé</li>
+                                <li>Filtrage collaboratif</li>
+                            </ul>
+                        </div>
                     </div>
+                    <button class="work__toggle button" data-action="more">Voir plus</button>
                 </div>
-                <div class="card__button-container">
-                    <button class="card__toggle button" data-action="more">Voir plus</button>
-                </div>
-            </article>
+            </div>
         </div>
     </section>
 
@@ -273,7 +278,7 @@
         <div class="education__container bd-grid">
             <article class="card">
                 <h3>MSc. in Business Management</h3>
-                <h4>EDHEC BS | 2019 </h4>
+                <h4>EDHEC BS | 2019</h4>
                 <p>Spécialisation en management, commerce, marketing et stratégie.</p>
             </article>
             <article class="card">
@@ -288,10 +293,22 @@
 <!--===== FOOTER =====-->
 <footer class="footer">
     <p class="footer__title">Saad El Aboudi</p>
+    <div class="footer__contact">
+        <p>Email: <a href="mailto:elaboudisaad@gmail.com" class="footer__contact-link">elaboudisaad@gmail.com</a></p>
+        <p>Téléphone: <a href="tel:+33617078713" class="footer__contact-link">+33 6 17 07 87 13</a></p>
+        <div class="footer__social">
+            <a href="https://www.linkedin.com/in/saadelaboudi/" class="footer__social-icon" aria-label="Profil LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/SaadElAboudi" class="footer__social-icon" aria-label="Profil GitHub"><i class="fab fa-github"></i></a>
+        </div>
+    </div>
     <p class="footer__copy">© 2025 Saad El Aboudi. Tous droits réservés.</p>
 </footer>
 
+<!-- Scripts -->
 <script src="https://unpkg.com/scrollreveal"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

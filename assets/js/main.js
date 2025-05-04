@@ -1,87 +1,99 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Menu Mobile
-    const toggle = document.getElementById('nav-toggle');
-    const nav = document.getElementById('nav-menu');
+// Dark Mode Toggle
+const darkModeToggle = document.getElementById('dark-mode-toggle');
+const body = document.body;
 
-    if (toggle && nav) {
-        toggle.addEventListener('click', () => {
-            nav.classList.toggle('show');
-        });
-    }
-
-    // Remove Menu on Link Click
-    const navLinks = document.querySelectorAll('.nav__link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (nav) {
-                nav.classList.remove('show');
-            }
-        });
-    });
-
-    // Scroll Sections Active Link
-    const sections = document.querySelectorAll('section[id]');
-    const scrollActive = () => {
-        const scrollY = window.scrollY;
-
-        sections.forEach(section => {
-            const sectionHeight = section.offsetHeight;
-            const sectionTop = section.offsetTop - 58;
-            const sectionId = section.getAttribute('id');
-            const navLink = document.querySelector(`.nav__menu a[href*="${sectionId}"]`);
-
-            if (navLink && scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                navLink.classList.add('active-link');
-            } else if (navLink) {
-                navLink.classList.remove('active-link');
-            }
-        });
-    };
-    window.addEventListener('scroll', scrollActive);
-
-    // Dark Mode Toggle
-    const toggleDarkMode = () => {
-        document.body.classList.toggle('dark-mode');
-        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-    };
-
-    // Check Dark Mode Preference
-    if (localStorage.getItem('darkMode') === 'true') {
-        document.body.classList.add('dark-mode');
-    }
-
-    // Card Toggle for "Voir plus/Voir moins"
-    const cardToggles = document.querySelectorAll('.card__toggle');
-    cardToggles.forEach(toggle => {
-        toggle.addEventListener('click', () => {
-            const card = toggle.closest('.card');
-            const content = card.querySelector('.card__content');
-            const isExpanded = card.classList.contains('expanded');
-
-            // Toggle expanded state
-            card.classList.toggle('expanded');
-            toggle.textContent = isExpanded ? 'Voir plus' : 'Voir moins';
-            toggle.setAttribute('data-action', isExpanded ? 'more' : 'less');
-
-            // Clean up content (remove unnecessary spaces)
-            const uls = content.querySelectorAll('ul');
-            uls.forEach(ul => {
-                ul.style.margin = '0';
-                ul.style.padding = '0 0 0 1.2rem';
-            });
-        });
-    });
-
-    // ScrollReveal Animations
-    const sr = ScrollReveal({
-        origin: 'top',
-        distance: '50px',
-        duration: 1800,
-        delay: 200,
-    });
-
-    sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text');
-    sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img', { delay: 300 });
-    sr.reveal('.home__social-icon', { interval: 200 });
-    sr.reveal('.skills__data, .card', { interval: 200 });
+darkModeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    const isDarkMode = body.classList.contains('dark-mode');
+    darkModeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    localStorage.setItem('darkMode', isDarkMode);
 });
+
+// Check for saved dark mode preference
+if (localStorage.getItem('darkMode') === 'true') {
+    body.classList.add('dark-mode');
+    darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+}
+
+// Mobile Menu Toggle
+const navToggle = document.getElementById('nav-toggle');
+const navMenu = document.getElementById('nav-menu');
+
+navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('show');
+});
+
+// Close mobile menu when clicking a link
+document.querySelectorAll('.nav__link').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('show');
+    });
+});
+
+// Active Link Highlight
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+    const scrollY = window.pageYOffset;
+    sections.forEach(current => {
+        const sectionHeight = current.offsetHeight;
+        const sectionTop = current.offsetTop - 50;
+        const sectionId = current.getAttribute('id');
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            document.querySelector(`.nav__link[href*=${sectionId}]`).classList.add('active-link');
+        } else {
+            document.querySelector(`.nav__link[href*=${sectionId}]`).classList.remove('active-link');
+        }
+    });
+});
+
+// ScrollReveal Animations
+const sr = ScrollReveal({
+    origin: 'top',
+    distance: '60px',
+    duration: 2000,
+    delay: 200,
+    reset: true
+});
+
+sr.reveal('.home__data, .home__social, .home__map', { interval: 200 });
+sr.reveal('.about__img, .about__text', { interval: 200 });
+sr.reveal('.skills__subtitle, .skills__text, .skills__data', { interval: 200 });
+sr.reveal('.work__item', { interval: 200 });
+sr.reveal('.education__container', { interval: 200 });
+sr.reveal('.footer__title, .footer__contact, .footer__copy', { interval: 200 });
+
+// Work Item Expand/Collapse
+document.querySelectorAll('.work__toggle').forEach(button => {
+    button.addEventListener('click', () => {
+        const card = button.closest('.work__card');
+        const action = button.getAttribute('data-action');
+        if (action === 'more') {
+            card.classList.add('expanded');
+            button.textContent = 'Voir moins';
+            button.setAttribute('data-action', 'less');
+        } else {
+            card.classList.remove('expanded');
+            button.textContent = 'Voir plus';
+            button.setAttribute('data-action', 'more');
+        }
+    });
+});
+
+// Initialize Leaflet Map
+const map = L.map('map').setView([50.629250, 3.057256], 12); // Centered on Lille, France
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+// Custom marker icon
+const customIcon = L.divIcon({
+    className: 'custom-marker',
+    html: `<div style="background: linear-gradient(135deg, #3b82f6, #a855f7); width: 30px; height: 30px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.3);"></div>`,
+    iconSize: [30, 30],
+    iconAnchor: [15, 15],
+    popupAnchor: [0, -15]
+});
+
+L.marker([50.629250, 3.057256], { icon: customIcon }).addTo(map)
+    .bindPopup('Saad El Aboudi<br>Lille, France')
+    .openPopup();
