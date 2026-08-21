@@ -950,7 +950,7 @@ img {
 }
 
 .project-card--featured {
-  grid-column: span 3;
+  grid-column: span 2;
 }
 
 .project-card::before {
@@ -1151,6 +1151,76 @@ img {
   height: 2.1rem;
   border-radius: 0;
   background: linear-gradient(90deg, rgba(185, 147, 90, 0.18), rgba(255, 255, 255, 0.08));
+}
+
+.project-preview--artisans {
+  background:
+    radial-gradient(circle at 20% 18%, rgba(185, 147, 90, 0.24), transparent 31%),
+    linear-gradient(135deg, #17140f, #22261e 58%, #101820);
+}
+
+.preview-os-header {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.preview-os-header strong {
+  color: var(--gold-light);
+}
+
+.preview-agents {
+  position: absolute;
+  top: 3.2rem;
+  left: 1rem;
+  right: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.preview-agents span {
+  display: grid;
+  place-items: center;
+  height: 2.8rem;
+  border: 1px solid rgba(185, 147, 90, 0.22);
+  background: rgba(255, 255, 255, 0.055);
+  color: rgba(255, 255, 255, 0.72);
+  font-family: var(--serif);
+  font-size: 1rem;
+}
+
+.preview-protocol {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.45rem;
+}
+
+.preview-protocol i {
+  padding: 0.42rem 0;
+  border-top: 1px solid rgba(185, 147, 90, 0.32);
+  color: rgba(255, 255, 255, 0.42);
+  font-family: var(--sans);
+  font-size: 0.54rem;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .project-preview--slaptax {
